@@ -1,0 +1,15 @@
+ABSTRACT:
+This program is made as an extension of the previous assignment. All the other commands still works but the submit command is handled differently. The code is spread across shell.c and scheduler.c which are to be compiled together in ./shell.
+There's a make file which does exactly that.
+
+IMPLEMENTATION:
+>>When the user submits the exec file, a child process is created where the exec file is sent, the parent process immediately pauses that process with SIGSTOP and the process id of the child process is added into a queue of a shared memory.
+
+>>Upon entering the desired number of exec files, the execution can be started by pressing 'Ctrl+\'which calls the scheduler.
+
+>>Scheduler take NCPU number of process,dequeue them and continues them with SIGCONT and then waits for TSLICE milliseconds. After waiting, it is checked if the process has completed or not via waitipid with attribute WNOHANG. If it is completed then the completion time and execution time of the process is updated whereas, if it is not completed then, only execution time is updated and the process is enqueued.
+
+>>The details of all the process are stored in a hashtable to ensure O(1) complexity while updating the detials.
+
+CONTRIBUTION:
+We have done this whole assignment together so there's no specific work for each other but we both contributedd 50-50.
